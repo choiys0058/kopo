@@ -1,0 +1,307 @@
+import UIKit
+
+import GameplayKit
+
+ 
+
+class ViewController: UIViewController {
+
+    let randomSource=GKARC4RandomSource()
+
+    
+
+    @IBOutlet weak var playerImageView: UIImageView!
+
+    @IBOutlet weak var computerImageView: UIImageView!
+
+    
+
+    @IBOutlet weak var messageLabel: UILabel!
+
+    @IBAction func tapStart() {
+
+        //이미지뷰에 바위를 출력
+
+        computerImageView.image=UIImage(named:"rock.png")
+
+        playerImageView.image=UIImage(named:"rock.png")
+
+        //레이블에 가위 바위 보를 출력
+
+        messageLabel.text="가위 바위 보"
+
+    }
+
+    
+
+    override func viewDidLoad() {
+
+        
+
+        super.viewDidLoad()
+
+            //180도 라디안을 구한다
+
+            let angle:CGFloat=CGFloat((180.0*M_PI)/180.0)
+
+            //이미지뷰를 회전시킨다
+
+            
+
+            computerImageView.transform=CGAffineTransform(rotationAngle: angle)
+
+        
+
+    }
+
+   
+
+    @IBAction func tapScissors() {
+
+        playerImageView.image=UIImage(named:"scissors.png")
+
+        doComputer(player:0)
+
+        
+
+        //버튼을 클릭했을때
+
+        //사용자화면그림을 가위로 바꾼다
+
+        //사용자화면그림이 0이 나올때 doComputer 메소드에 호출
+
+    }
+
+    @IBAction func tapRock() {
+
+        playerImageView.image=UIImage(named:"rock.png")
+
+        doComputer(player:1)
+
+    }
+
+    @IBAction func tapPaper() {
+
+        playerImageView.image=UIImage(named:"paper.png")
+
+        doComputer(player:2)
+
+    }
+
+ 
+
+    func doComputer(player:Int){
+
+        // 0 1 2 범위의 랜덤값을 구한다
+
+        let computer=randomSource.nextInt(upperBound:3)
+
+        // 승패판정전용문자열준비
+
+        
+
+        var msg=""
+
+        
+
+        // switch ~ case 문
+
+         
+
+        switch computer{
+
+        case 0:
+
+            //가위
+
+            computerImageView.image=UIImage(named:"scissors.png")
+
+            
+
+        case 0:
+
+            //가위
+
+            msg="비겼어요"
+
+        case 1:
+
+            //바위
+
+            msg="이겼어요"
+
+        case 2:
+
+            //보
+
+            msg="졌어요"
+
+        default:
+
+            break
+
+        }
+
+        switch computer{
+
+        case 1:
+
+        //바위
+
+        computerImageView.image=UIImage(named:"rock.png")
+
+        
+
+        case 0:
+
+        //가위
+
+        msg="졌어요"
+
+        case 1:
+
+        //바위
+
+        msg="비겼어요"
+
+        case 2:
+
+        //보
+
+        msg="이겼어요"
+
+        default:
+
+        break
+
+        }
+
+        
+
+        switch computer{
+
+        case 2:
+
+            //보
+
+            computerImageView.image=UIImage(named:"paper.png")
+
+            
+
+        case 0:
+
+            //가위
+
+            msg="이겼어요"
+
+        case 1:
+
+            //바위
+
+            msg="졌어요"
+
+        case 2:
+
+            //보
+
+            msg="비겼어요"
+
+        default:
+
+        break
+
+        }
+
+        messageLabel.text=msg
+
+    }
+
+    
+
+    
+
+    func doComputer2(player:Int){
+
+        
+
+        // 0 1 2 범위의 랜덤값을 구한다
+
+        let computer=randomSource.nextInt(upperBound:3)
+
+        // 승패판정전용문자열준비
+
+        
+
+        var msg=""
+
+        
+
+        if(computer==0){
+
+            computerImageView.image=UIImage(named:"scissors.png")
+
+            if(player==0){
+
+                msg="비겼어요"
+
+            }else if(player==1){
+
+                msg="이겼어요"
+
+            }else if(player==2){
+
+                msg="졌어요"
+
+            }
+
+        }
+
+        else if(computer==1){
+
+            computerImageView.image=UIImage(named:"rock.png")
+
+            if(player==0){
+
+                msg="졌어요"
+
+            }else if(player==1){
+
+                msg="비겼어요"
+
+            }else if(player==2){
+
+                msg="이겼어요"
+
+            }
+
+        }
+
+        else if(computer==2){
+
+            computerImageView.image=UIImage(named:"paper.png")
+
+            if(player==0){
+
+                msg="이겼어요"
+
+            }else if(player==1){
+
+                msg="졌어요"
+
+            }else if(player==2){
+
+                msg="비겼어요"
+
+            }
+
+        }
+
+        messageLabel.text=msg
+
+    }
+
+ 
+
+    
+
+}
